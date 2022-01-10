@@ -1,0 +1,73 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+      <link href="css/createProduct.css" rel="stylesheet" type="text/css">
+   </head>
+   <body>
+      <div class="areaContent">
+         <form class="addProductForm" name="addproductForm" method="post" enctype="multipart/form-data">
+            <div class="sectionOne">
+               <div class="fieldsArea">
+                  <div class="additionalArea">
+
+                  </div>
+               </div>
+            </div>
+            <h2>Metadata <i class="fas fa-info-circle"></i></h2>
+            <div class="container">
+               <div class="sectionOne lastArea input-form">
+                  <div class="fieldsArea">
+                     <label style = "margin-top:10px"><span>Key</span></span></label>
+                     <input type='text' placeholder='key' name='key_1' class="key">
+                  </div>
+                  <div class="fieldsArea">
+                     <label style = "margin-top:10px"><span>Value</span></span></label>
+                     <input type="text" placeholder='value' name='value_1' class="value">
+                  </div>
+                     <div id="delete">
+                        <input type="submit" value="X" class="crossBtn">
+                     </div>
+               </div>
+            </div>
+         </form>
+         <div class="but_add">
+            <button id="but_add" class="blueBtn"><i class="fas fa-plus"></i> Add More metadata</button>
+         </div>
+      <div>
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+      <script>
+         $(document).ready(function() {
+            $('#but_add').click(function(){
+               var lastname_name = $('.input-form .fieldsArea input[type=text]:nth-child(2)').last().attr('name');
+               var split_name = lastname_name.split('_');
+               // New index
+               var index = Number(split_name[1]) + 1;
+               // Create clone
+               var newel = $('.input-form:last').clone(true);
+               // Set id of new element
+               $(newel).find('.key').attr("name","key_"+index);
+               $(newel).find('.value').attr("name","value_"+index);
+               // Set value
+               $(newel).find('.key').val("key_"+index);
+               $(newel).find('.value').val("value_"+index);
+               // Insert element
+               $(newel).insertAfter(".input-form:last");
+            });
+            $('#delete').click(function(e) {
+               e.stopPropagation();
+               var delete_ele = $(this).parent('.input-form');
+               if($(delete_ele).is(':only-child')) {
+                  e.preventDefault();
+               } else {
+                  $(delete_ele).remove();
+               }
+            });
+        });
+     </script>
+   </body>
+</html>
+
